@@ -1,7 +1,7 @@
 all: kind kubectl ingress awx
 
 kind:
-        rm /root/.kube/config
+	rm /root/.kube/config
 	kind create cluster --image kindest/node:v1.19.11 --config kind.yml
 
 kubectl: 
@@ -15,7 +15,7 @@ awx:
 	kubectl apply -f password.yml
 	kubectl apply -f https://raw.githubusercontent.com/ansible/awx-operator/0.12.0/deploy/awx-operator.yaml
 	@read -p "FQDN: " FQDN \
-        && sed -i "s/^  hostname:.*/  hostname: $$FQDN/" /root/kind_awx//awx.yml
+	&& sed -i "s/^  hostname:.*/  hostname: $$FQDN/" /root/kind_awx//awx.yml
 	kubectl apply -f awx.yml
 
 clean:
