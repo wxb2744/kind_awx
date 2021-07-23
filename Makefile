@@ -16,3 +16,6 @@ awx:
 	@read -p "FQDN: " FQDN \
         && sed -i "s/^  hostname:.*/  hostname: $$FQDN/" /root/kind_awx//awx.yml
 	kubectl apply -f awx.yml
+
+clean:
+	kind delete cluster
