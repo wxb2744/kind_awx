@@ -1,7 +1,6 @@
 all: kind kubectl ingress awx
 
 kind:
-	rm /root/.kube/config
 	kind create cluster --image kindest/node:v1.19.11 --config kind.yml
 
 kubectl: 
