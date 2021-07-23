@@ -1,6 +1,7 @@
 all: kind kubectl ingress awx
 
 kind:
+        rm /root/.kube/config
 	kind create cluster --image kindest/node:v1.19.11 --config kind.yml
 
 kubectl: 
@@ -19,3 +20,8 @@ awx:
 
 clean:
 	kind delete cluster
+
+fix:
+	kubectl delete ingress awx-ingress
+	kubectl replace -f awx.yml
+	kubectl apply -f awx.yml
