@@ -1,0 +1,426 @@
+{
+     "users": [
+          {
+               "username": "admin",
+               "first_name": "",
+               "last_name": "",
+               "email": "test@example.com",
+               "is_superuser": true,
+               "is_system_auditor": false,
+               "related": {
+                    "roles": [
+                         {
+                              "name": "Admin",
+                              "type": "role",
+                              "content_object": {
+                                   "organization": {
+                                        "name": "Default",
+                                        "type": "organization"
+                                   },
+                                   "name": "test",
+                                   "type": "job_template"
+                              }
+                         },
+                         {
+                              "name": "Admin",
+                              "type": "role",
+                              "content_object": {
+                                   "organization": null,
+                                   "name": "Demo Credential",
+                                   "credential_type": {
+                                        "name": "Machine",
+                                        "kind": "ssh",
+                                        "type": "credential_type"
+                                   },
+                                   "type": "credential"
+                              }
+                         },
+                         {
+                              "name": "System Administrator",
+                              "type": "role"
+                         }
+                    ]
+               },
+               "natural_key": {
+                    "username": "admin",
+                    "type": "user"
+               }
+          }
+     ],
+     "organizations": [
+          {
+               "name": "Default",
+               "description": "",
+               "max_hosts": 0,
+               "default_environment": null,
+               "related": {
+                    "execution_environments": [],
+                    "notification_templates": [],
+                    "notification_templates_started": [],
+                    "notification_templates_success": [],
+                    "notification_templates_error": [],
+                    "notification_templates_approvals": [],
+                    "galaxy_credentials": [
+                         {
+                              "organization": null,
+                              "name": "Ansible Galaxy",
+                              "credential_type": {
+                                   "name": "Ansible Galaxy/Automation Hub API Token",
+                                   "kind": "galaxy",
+                                   "type": "credential_type"
+                              },
+                              "type": "credential"
+                         }
+                    ]
+               },
+               "natural_key": {
+                    "name": "Default",
+                    "type": "organization"
+               }
+          }
+     ],
+     "teams": [],
+     "credential_types": [],
+     "credentials": [
+          {
+               "name": "Demo Credential",
+               "description": "",
+               "organization": null,
+               "inputs": {
+                    "username": "admin"
+               },
+               "credential_type": {
+                    "name": "Machine",
+                    "kind": "ssh",
+                    "type": "credential_type"
+               },
+               "user": {
+                    "username": "admin",
+                    "type": "user"
+               },
+               "natural_key": {
+                    "organization": null,
+                    "name": "Demo Credential",
+                    "credential_type": {
+                         "name": "Machine",
+                         "kind": "ssh",
+                         "type": "credential_type"
+                    },
+                    "type": "credential"
+               }
+          }
+     ],
+     "notification_templates": [],
+     "projects": [
+          {
+               "name": "Demo Project",
+               "description": "",
+               "local_path": "_6__demo_project",
+               "scm_type": "git",
+               "scm_url": "https://github.com/ansible/ansible-tower-samples",
+               "scm_branch": "",
+               "scm_refspec": "",
+               "scm_clean": false,
+               "scm_track_submodules": false,
+               "scm_delete_on_update": false,
+               "credential": null,
+               "timeout": 0,
+               "scm_update_on_launch": true,
+               "scm_update_cache_timeout": 0,
+               "allow_override": false,
+               "default_environment": null,
+               "organization": {
+                    "name": "Default",
+                    "type": "organization"
+               },
+               "related": {
+                    "schedules": [],
+                    "notification_templates_started": [],
+                    "notification_templates_success": [],
+                    "notification_templates_error": []
+               },
+               "natural_key": {
+                    "organization": {
+                         "name": "Default",
+                         "type": "organization"
+                    },
+                    "name": "Demo Project",
+                    "type": "project"
+               }
+          },
+          {
+               "name": "NetApp",
+               "description": "",
+               "local_path": "_8__netapp",
+               "scm_type": "git",
+               "scm_url": "https://www.github.com/netapp-automation/Tower_defaults",
+               "scm_branch": "",
+               "scm_refspec": "",
+               "scm_clean": false,
+               "scm_track_submodules": false,
+               "scm_delete_on_update": false,
+               "credential": null,
+               "timeout": 0,
+               "scm_update_on_launch": false,
+               "scm_update_cache_timeout": 0,
+               "allow_override": false,
+               "organization": {
+                    "name": "Default",
+                    "type": "organization"
+               },
+               "default_environment": {
+                    "name": "schmots",
+                    "type": "execution_environment"
+               },
+               "related": {
+                    "schedules": [],
+                    "notification_templates_started": [],
+                    "notification_templates_success": [],
+                    "notification_templates_error": []
+               },
+               "natural_key": {
+                    "organization": {
+                         "name": "Default",
+                         "type": "organization"
+                    },
+                    "name": "NetApp",
+                    "type": "project"
+               }
+          }
+     ],
+     "inventory": [
+          {
+               "name": "Demo Inventory",
+               "description": "",
+               "kind": "",
+               "host_filter": null,
+               "variables": "",
+               "organization": {
+                    "name": "Default",
+                    "type": "organization"
+               },
+               "related": {
+                    "hosts": [
+                         {
+                              "name": "localhost",
+                              "description": "",
+                              "enabled": true,
+                              "instance_id": "",
+                              "variables": "ansible_connection: local\nansible_python_interpreter: '{{ ansible_playbook_python }}'",
+                              "inventory": {
+                                   "organization": {
+                                        "name": "Default",
+                                        "type": "organization"
+                                   },
+                                   "name": "Demo Inventory",
+                                   "type": "inventory"
+                              },
+                              "related": {
+                                   "groups": []
+                              },
+                              "natural_key": {
+                                   "name": "localhost",
+                                   "inventory": {
+                                        "organization": {
+                                             "name": "Default",
+                                             "type": "organization"
+                                        },
+                                        "name": "Demo Inventory",
+                                        "type": "inventory"
+                                   },
+                                   "type": "host"
+                              }
+                         }
+                    ],
+                    "groups": []
+               },
+               "natural_key": {
+                    "organization": {
+                         "name": "Default",
+                         "type": "organization"
+                    },
+                    "name": "Demo Inventory",
+                    "type": "inventory"
+               }
+          }
+     ],
+     "inventory_sources": [],
+     "job_templates": [
+          {
+               "name": "Demo Job Template",
+               "description": "",
+               "job_type": "run",
+               "playbook": "hello_world.yml",
+               "scm_branch": "",
+               "forks": 0,
+               "limit": "",
+               "verbosity": 0,
+               "extra_vars": "",
+               "job_tags": "",
+               "force_handlers": false,
+               "skip_tags": "",
+               "start_at_task": "",
+               "timeout": 0,
+               "use_fact_cache": false,
+               "execution_environment": null,
+               "host_config_key": "",
+               "ask_scm_branch_on_launch": false,
+               "ask_diff_mode_on_launch": false,
+               "ask_variables_on_launch": false,
+               "ask_limit_on_launch": false,
+               "ask_tags_on_launch": false,
+               "ask_skip_tags_on_launch": false,
+               "ask_job_type_on_launch": false,
+               "ask_verbosity_on_launch": false,
+               "ask_inventory_on_launch": false,
+               "ask_credential_on_launch": false,
+               "survey_enabled": false,
+               "become_enabled": false,
+               "diff_mode": false,
+               "allow_simultaneous": false,
+               "job_slice_count": 1,
+               "webhook_service": "",
+               "webhook_credential": null,
+               "inventory": {
+                    "organization": {
+                         "name": "Default",
+                         "type": "organization"
+                    },
+                    "name": "Demo Inventory",
+                    "type": "inventory"
+               },
+               "project": {
+                    "organization": {
+                         "name": "Default",
+                         "type": "organization"
+                    },
+                    "name": "Demo Project",
+                    "type": "project"
+               },
+               "related": {
+                    "labels": [],
+                    "credentials": [
+                         {
+                              "organization": null,
+                              "name": "Demo Credential",
+                              "credential_type": {
+                                   "name": "Machine",
+                                   "kind": "ssh",
+                                   "type": "credential_type"
+                              },
+                              "type": "credential"
+                         }
+                    ],
+                    "schedules": [],
+                    "notification_templates_started": [],
+                    "notification_templates_success": [],
+                    "notification_templates_error": [],
+                    "survey_spec": {}
+               },
+               "natural_key": {
+                    "organization": {
+                         "name": "Default",
+                         "type": "organization"
+                    },
+                    "name": "Demo Job Template",
+                    "type": "job_template"
+               }
+          },
+          {
+               "name": "test",
+               "description": "",
+               "job_type": "run",
+               "playbook": "volume.yml",
+               "scm_branch": "",
+               "forks": 0,
+               "limit": "",
+               "verbosity": 0,
+               "extra_vars": "---",
+               "job_tags": "",
+               "force_handlers": false,
+               "skip_tags": "",
+               "start_at_task": "",
+               "timeout": 0,
+               "use_fact_cache": false,
+               "execution_environment": null,
+               "host_config_key": "",
+               "ask_scm_branch_on_launch": false,
+               "ask_diff_mode_on_launch": false,
+               "ask_variables_on_launch": false,
+               "ask_limit_on_launch": false,
+               "ask_tags_on_launch": false,
+               "ask_skip_tags_on_launch": false,
+               "ask_job_type_on_launch": false,
+               "ask_verbosity_on_launch": false,
+               "ask_inventory_on_launch": false,
+               "ask_credential_on_launch": false,
+               "survey_enabled": false,
+               "become_enabled": false,
+               "diff_mode": false,
+               "allow_simultaneous": false,
+               "job_slice_count": 1,
+               "webhook_service": "",
+               "webhook_credential": null,
+               "inventory": {
+                    "organization": {
+                         "name": "Default",
+                         "type": "organization"
+                    },
+                    "name": "Demo Inventory",
+                    "type": "inventory"
+               },
+               "project": {
+                    "organization": {
+                         "name": "Default",
+                         "type": "organization"
+                    },
+                    "name": "NetApp",
+                    "type": "project"
+               },
+               "related": {
+                    "labels": [],
+                    "credentials": [],
+                    "schedules": [],
+                    "notification_templates_started": [],
+                    "notification_templates_success": [],
+                    "notification_templates_error": [],
+                    "survey_spec": {}
+               },
+               "natural_key": {
+                    "organization": {
+                         "name": "Default",
+                         "type": "organization"
+                    },
+                    "name": "test",
+                    "type": "job_template"
+               }
+          }
+     ],
+     "workflow_job_templates": [],
+     "execution_environments": [
+          {
+               "name": "schmots",
+               "description": "",
+               "organization": null,
+               "image": "schmots1/na_ansible_ee",
+               "credential": null,
+               "pull": "",
+               "natural_key": {
+                    "name": "schmots",
+                    "type": "execution_environment"
+               }
+          },
+          {
+               "name": "AWX EE 0.5.0",
+               "description": "",
+               "organization": null,
+               "image": "quay.io/ansible/awx-ee:0.5.0",
+               "credential": null,
+               "pull": "",
+               "natural_key": {
+                    "name": "AWX EE 0.5.0",
+                    "type": "execution_environment"
+               }
+          }
+     ]
+}
