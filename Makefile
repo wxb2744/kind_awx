@@ -26,7 +26,9 @@ fix: kubectl
 	kubectl apply -f awx.yml
 
 import:
+        $(eval MASTER_IP=$(shell docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' kind-control-plane))
 	@read -p "FQDN: " FQDN \
+        && echo "$(MASTER_IP) $$FQDN" >> /etc/hosts
         && awx --conf.hostname $$FQDN conf.username admin conf.password password -k import < export.txt
 	kubectl --insecure-skip-tls-verify delete ingress awx-ingress
 	kubectl --insecure-skip-tls-verify replace -f awx.yml
