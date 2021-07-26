@@ -20,7 +20,7 @@ awx:
 clean:
 	kind delete cluster
 
-fix:
-	kubectl delete ingress awx-ingress
-	kubectl replace -f awx.yml
-	kubectl apply -f awx.yml
+fix: kubectl
+	kubectl --insecure-skip-tls-verify delete ingress awx-ingress
+	kubectl --insecure-skip-tls-verify replace -f awx.yml
+	kubectl --insecure-skip-tls-verify apply -f awx.yml
