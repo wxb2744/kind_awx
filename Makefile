@@ -20,7 +20,7 @@ awx:
 clean:
 	kind delete cluster
 
-fix:
+fix: kubectl
 	kubectl delete ingress awx-ingress
 	kubectl replace -f awx.yml
 	kubectl apply -f awx.yml
