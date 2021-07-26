@@ -8,9 +8,12 @@ RUN apk add --no-cache \
     jq \
     make \
     openssl \
+    py3-pip \
     shadow \
     vim \
     wget
+
+RUN pip3 install awxkit
 
 RUN  git clone https://git.systemprep.net/schmots/kind_awx /root/kind_awx
 

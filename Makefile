@@ -24,3 +24,7 @@ fix: kubectl
 	kubectl delete ingress awx-ingress
 	kubectl replace -f awx.yml
 	kubectl apply -f awx.yml
+
+import:
+	@read -p "FQDN: " FQDN \
+        && awx --conf.hostname $$FQDN conf.username admin conf.password password -k import < export.txt
