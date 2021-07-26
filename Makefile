@@ -21,7 +21,6 @@ clean:
 	kind delete cluster
 
 fix: kubectl
-<<<<<<< HEAD
 	kubectl delete ingress awx-ingress
 	kubectl replace -f awx.yml
 	kubectl apply -f awx.yml
@@ -29,8 +28,6 @@ fix: kubectl
 import:
 	@read -p "FQDN: " FQDN \
         && awx --conf.hostname $$FQDN conf.username admin conf.password password -k import < export.txt
-=======
 	kubectl --insecure-skip-tls-verify delete ingress awx-ingress
 	kubectl --insecure-skip-tls-verify replace -f awx.yml
 	kubectl --insecure-skip-tls-verify apply -f awx.yml
->>>>>>> 8bdde73da8e0483f58e28c8cd46eca22e1abdf3b
