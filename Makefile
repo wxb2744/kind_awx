@@ -29,4 +29,4 @@ import:
 	$(eval MASTER_IP=$(shell docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' kind-control-plane))
 	@read -p "FQDN: " FQDN \
 	&& echo "$(MASTER_IP) $$FQDN" >> /etc/hosts \
-	&& awx --conf.hostname $$FQDN conf.username admin conf.password password -k import < export.txt
+	&& awx --conf.host https://$$FQDN --conf.username admin --conf.password password -k import < export.txt
