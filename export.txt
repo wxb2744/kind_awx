@@ -17,7 +17,7 @@
                                         "name": "Default",
                                         "type": "organization"
                                    },
-                                   "name": "Create ONTAP NFS FlexVolume",
+                                   "name": "Create ONTAP  FlexVolume",
                                    "type": "job_template"
                               }
                          },
@@ -29,7 +29,7 @@
                                         "name": "Default",
                                         "type": "organization"
                                    },
-                                   "name": "Create ONTAP  FlexVolume",
+                                   "name": "Create ONTAP NFS FlexVolume",
                                    "type": "job_template"
                               }
                          },
@@ -54,6 +54,18 @@
                                         "type": "organization"
                                    },
                                    "name": "Move ONTAP  FlexVolume",
+                                   "type": "job_template"
+                              }
+                         },
+                         {
+                              "name": "Admin",
+                              "type": "role",
+                              "content_object": {
+                                   "organization": {
+                                        "name": "Default",
+                                        "type": "organization"
+                                   },
+                                   "name": "Create ONTAP CIFS FlexVolume",
                                    "type": "job_template"
                               }
                          },
@@ -261,7 +273,7 @@
           {
                "name": "NetApp ONTAP pack",
                "description": "",
-               "local_path": "_8__netapp",
+               "local_path": "_8__netapp_ontap_pack",
                "scm_type": "git",
                "scm_url": "https://www.github.com/netapp-automation/Tower_defaults",
                "scm_branch": "",
@@ -356,6 +368,191 @@
      ],
      "inventory_sources": [],
      "job_templates": [
+          {
+               "name": "Create ONTAP CIFS FlexVolume",
+               "description": "Creates a FlexVolume for NFS export.  Will create the export policy and rule to go along with it.",
+               "job_type": "run",
+               "playbook": "cifs_share.yml",
+               "scm_branch": "",
+               "forks": 0,
+               "limit": "",
+               "verbosity": 0,
+               "extra_vars": "---",
+               "job_tags": "",
+               "force_handlers": false,
+               "skip_tags": "",
+               "start_at_task": "",
+               "timeout": 0,
+               "use_fact_cache": false,
+               "execution_environment": null,
+               "host_config_key": "",
+               "ask_scm_branch_on_launch": false,
+               "ask_diff_mode_on_launch": false,
+               "ask_variables_on_launch": false,
+               "ask_limit_on_launch": false,
+               "ask_tags_on_launch": false,
+               "ask_skip_tags_on_launch": false,
+               "ask_job_type_on_launch": false,
+               "ask_verbosity_on_launch": false,
+               "ask_inventory_on_launch": false,
+               "ask_credential_on_launch": false,
+               "survey_enabled": true,
+               "become_enabled": false,
+               "diff_mode": false,
+               "allow_simultaneous": false,
+               "job_slice_count": 1,
+               "webhook_service": "",
+               "webhook_credential": null,
+               "inventory": {
+                    "organization": {
+                         "name": "Default",
+                         "type": "organization"
+                    },
+                    "name": "Demo Inventory",
+                    "type": "inventory"
+               },
+               "project": {
+                    "organization": {
+                         "name": "Default",
+                         "type": "organization"
+                    },
+                    "name": "NetApp ONTAP pack",
+                    "type": "project"
+               },
+               "related": {
+                    "labels": [],
+                    "credentials": [
+                         {
+                              "organization": null,
+                              "name": "ONTAP",
+                              "credential_type": {
+                                   "name": "NetApp",
+                                   "kind": "cloud",
+                                   "type": "credential_type"
+                              },
+                              "type": "credential"
+                         }
+                    ],
+                    "schedules": [],
+                    "notification_templates_started": [],
+                    "notification_templates_success": [],
+                    "notification_templates_error": [],
+                    "survey_spec": {
+                         "name": "",
+                         "description": "",
+                         "spec": [
+                              {
+                                   "question_name": "Cluster IP or FQDN",
+                                   "question_description": "IP Address or FQDN for Cluster Management LIF",
+                                   "required": true,
+                                   "type": "text",
+                                   "variable": "netapp_hostname",
+                                   "min": 0,
+                                   "max": 1024,
+                                   "default": "",
+                                   "choices": "",
+                                   "new_question": true
+                              },
+                              {
+                                   "question_name": "Storage Virtual Machine",
+                                   "question_description": "SVM to create FlexVolume on",
+                                   "required": true,
+                                   "type": "text",
+                                   "variable": "vserver",
+                                   "min": 0,
+                                   "max": 1024,
+                                   "default": "",
+                                   "choices": "",
+                                   "new_question": true
+                              },
+                              {
+                                   "question_name": "FlexVolume name",
+                                   "question_description": "Name of FlexVolume to be created",
+                                   "required": true,
+                                   "type": "text",
+                                   "variable": "volume_name",
+                                   "min": 0,
+                                   "max": 1024,
+                                   "default": "",
+                                   "choices": "",
+                                   "formattedChoices": [
+                                        {
+                                             "choice": "",
+                                             "isDefault": false,
+                                             "id": 0
+                                        }
+                                   ],
+                                   "new_question": false
+                              },
+                              {
+                                   "question_name": "Size of FlexVolume to be created in GB",
+                                   "question_description": "Size of FlexVolume to be created giving in gigabytes",
+                                   "required": true,
+                                   "type": "text",
+                                   "variable": "size",
+                                   "min": 0,
+                                   "max": 1024,
+                                   "default": "",
+                                   "choices": "",
+                                   "formattedChoices": [
+                                        {
+                                             "choice": "",
+                                             "isDefault": false,
+                                             "id": 0
+                                        }
+                                   ],
+                                   "new_question": false
+                              },
+                              {
+                                   "question_name": "Comment for FlexVolume",
+                                   "question_description": "Any text to add to the volumes comment field",
+                                   "required": false,
+                                   "type": "text",
+                                   "variable": "comment",
+                                   "min": 0,
+                                   "max": 1024,
+                                   "default": "",
+                                   "choices": "",
+                                   "formattedChoices": [
+                                        {
+                                             "choice": "",
+                                             "isDefault": false,
+                                             "id": 0
+                                        }
+                                   ],
+                                   "new_question": false
+                              },
+                              {
+                                   "question_name": "Comment for CIFS share",
+                                   "question_description": "Add a comment to the share",
+                                   "required": false,
+                                   "type": "text",
+                                   "variable": "cifs_comment",
+                                   "min": 0,
+                                   "max": 1024,
+                                   "default": "",
+                                   "choices": "",
+                                   "formattedChoices": [
+                                        {
+                                             "choice": "",
+                                             "isDefault": false,
+                                             "id": 0
+                                        }
+                                   ],
+                                   "new_question": false
+                              }
+                         ]
+                    }
+               },
+               "natural_key": {
+                    "organization": {
+                         "name": "Default",
+                         "type": "organization"
+                    },
+                    "name": "Create ONTAP CIFS FlexVolume",
+                    "type": "job_template"
+               }
+          },
           {
                "name": "Create ONTAP  FlexVolume",
                "description": "Creates a thin provisioned FlexVolume.",
