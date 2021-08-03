@@ -65,7 +65,7 @@
                                         "name": "Default",
                                         "type": "organization"
                                    },
-                                   "name": "Create ONTAP CIFS FlexVolume",
+                                   "name": "Create Cluster Peering",
                                    "type": "job_template"
                               }
                          },
@@ -369,10 +369,10 @@
      "inventory_sources": [],
      "job_templates": [
           {
-               "name": "Create ONTAP CIFS FlexVolume",
-               "description": "Creates a FlexVolume for NFS export.  Will create the export policy and rule to go along with it.",
+               "name": "Create Cluster Peering",
+               "description": "This workflow will peer two clusters for Snapmirror allowence",
                "job_type": "run",
-               "playbook": "cifs_share.yml",
+               "playbook": "cluster_peer.yml",
                "scm_branch": "",
                "forks": 0,
                "limit": "",
@@ -442,8 +442,8 @@
                          "description": "",
                          "spec": [
                               {
-                                   "question_name": "Cluster IP or FQDN",
-                                   "question_description": "IP Address or FQDN for Cluster Management LIF",
+                                   "question_name": "Source ONTAP Cluster hostname",
+                                   "question_description": "The IP address or DNS reachable/FQDN of source ONTAP Cluster",
                                    "required": true,
                                    "type": "text",
                                    "variable": "netapp_hostname",
@@ -451,95 +451,57 @@
                                    "max": 1024,
                                    "default": "",
                                    "choices": "",
+                                   "formattedChoices": [
+                                        {
+                                             "choice": "",
+                                             "isDefault": false,
+                                             "id": 0
+                                        }
+                                   ],
+                                   "new_question": false
+                              },
+                              {
+                                   "question_name": "Source Intercluster LIF IP address(es)",
+                                   "question_description": "A comma separated list of intercluster LIFs IP addresses to be used by the Source Cluster for Snapmirror traffic",
+                                   "required": true,
+                                   "type": "text",
+                                   "variable": "src_int_lifs",
+                                   "min": 0,
+                                   "max": 1024,
+                                   "default": "",
+                                   "choices": "",
                                    "new_question": true
                               },
                               {
-                                   "question_name": "Storage Virtual Machine",
-                                   "question_description": "SVM to create FlexVolume on",
+                                   "question_name": "Destination ONTAP Cluster hostname",
+                                   "question_description": "IP address or DNS reachable/FQDN of destination ONTAP Cluster",
                                    "required": true,
                                    "type": "text",
-                                   "variable": "vserver",
+                                   "variable": "dest_netapp_hostname",
+                                   "min": 0,
+                                   "max": 1024,
+                                   "default": "",
+                                   "choices": "",
+                                   "formattedChoices": [
+                                        {
+                                             "choice": "",
+                                             "isDefault": false,
+                                             "id": 0
+                                        }
+                                   ],
+                                   "new_question": false
+                              },
+                              {
+                                   "question_name": "Destination Intercluster LIF address(es)",
+                                   "question_description": "Comma separated list of Intercluster LIFs IP addresses to be used for Snapmirror traffic",
+                                   "required": true,
+                                   "type": "text",
+                                   "variable": "dest_int_lifs",
                                    "min": 0,
                                    "max": 1024,
                                    "default": "",
                                    "choices": "",
                                    "new_question": true
-                              },
-                              {
-                                   "question_name": "FlexVolume name",
-                                   "question_description": "Name of FlexVolume to be created",
-                                   "required": true,
-                                   "type": "text",
-                                   "variable": "volume_name",
-                                   "min": 0,
-                                   "max": 1024,
-                                   "default": "",
-                                   "choices": "",
-                                   "formattedChoices": [
-                                        {
-                                             "choice": "",
-                                             "isDefault": false,
-                                             "id": 0
-                                        }
-                                   ],
-                                   "new_question": false
-                              },
-                              {
-                                   "question_name": "Size of FlexVolume to be created in GB",
-                                   "question_description": "Size of FlexVolume to be created giving in gigabytes",
-                                   "required": true,
-                                   "type": "text",
-                                   "variable": "size",
-                                   "min": 0,
-                                   "max": 1024,
-                                   "default": "",
-                                   "choices": "",
-                                   "formattedChoices": [
-                                        {
-                                             "choice": "",
-                                             "isDefault": false,
-                                             "id": 0
-                                        }
-                                   ],
-                                   "new_question": false
-                              },
-                              {
-                                   "question_name": "Comment for FlexVolume",
-                                   "question_description": "Any text to add to the volumes comment field",
-                                   "required": false,
-                                   "type": "text",
-                                   "variable": "comment",
-                                   "min": 0,
-                                   "max": 1024,
-                                   "default": "",
-                                   "choices": "",
-                                   "formattedChoices": [
-                                        {
-                                             "choice": "",
-                                             "isDefault": false,
-                                             "id": 0
-                                        }
-                                   ],
-                                   "new_question": false
-                              },
-                              {
-                                   "question_name": "Comment for CIFS share",
-                                   "question_description": "Add a comment to the share",
-                                   "required": false,
-                                   "type": "text",
-                                   "variable": "cifs_comment",
-                                   "min": 0,
-                                   "max": 1024,
-                                   "default": "",
-                                   "choices": "",
-                                   "formattedChoices": [
-                                        {
-                                             "choice": "",
-                                             "isDefault": false,
-                                             "id": 0
-                                        }
-                                   ],
-                                   "new_question": false
                               }
                          ]
                     }
@@ -549,7 +511,7 @@
                          "name": "Default",
                          "type": "organization"
                     },
-                    "name": "Create ONTAP CIFS FlexVolume",
+                    "name": "Create Cluster Peering",
                     "type": "job_template"
                }
           },
