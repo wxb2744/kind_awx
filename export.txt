@@ -121,6 +121,18 @@
                               "name": "Admin",
                               "type": "role",
                               "content_object": {
+                                   "organization": {
+                                        "name": "Default",
+                                        "type": "organization"
+                                   },
+                                   "name": "Delete Volume Snapmirror",
+                                   "type": "job_template"
+                              }
+                         },
+                         {
+                              "name": "Admin",
+                              "type": "role",
+                              "content_object": {
                                    "organization": null,
                                    "name": "Demo Credential",
                                    "credential_type": {
@@ -1616,6 +1628,186 @@
                          "type": "organization"
                     },
                     "name": "Delete ONTAP  FlexVolume",
+                    "type": "job_template"
+               }
+          },
+          {
+               "name": "Delete Volume Snapmirror",
+               "description": "This workflow will delete a Snapmirror relationship that was created using the 'Create Volume Snapmirror' Job Template",
+               "job_type": "run",
+               "playbook": "snapmirror_delete.yml",
+               "scm_branch": "",
+               "forks": 0,
+               "limit": "",
+               "verbosity": 0,
+               "extra_vars": "---",
+               "job_tags": "",
+               "force_handlers": false,
+               "skip_tags": "",
+               "start_at_task": "",
+               "timeout": 0,
+               "use_fact_cache": false,
+               "execution_environment": null,
+               "host_config_key": "",
+               "ask_scm_branch_on_launch": false,
+               "ask_diff_mode_on_launch": false,
+               "ask_variables_on_launch": false,
+               "ask_limit_on_launch": false,
+               "ask_tags_on_launch": false,
+               "ask_skip_tags_on_launch": false,
+               "ask_job_type_on_launch": false,
+               "ask_verbosity_on_launch": false,
+               "ask_inventory_on_launch": false,
+               "ask_credential_on_launch": false,
+               "survey_enabled": true,
+               "become_enabled": false,
+               "diff_mode": false,
+               "allow_simultaneous": false,
+               "job_slice_count": 1,
+               "webhook_service": "",
+               "webhook_credential": null,
+               "inventory": {
+                    "organization": {
+                         "name": "Default",
+                         "type": "organization"
+                    },
+                    "name": "Demo Inventory",
+                    "type": "inventory"
+               },
+               "project": {
+                    "organization": {
+                         "name": "Default",
+                         "type": "organization"
+                    },
+                    "name": "NetApp ONTAP pack",
+                    "type": "project"
+               },
+               "related": {
+                    "labels": [],
+                    "credentials": [
+                         {
+                              "organization": null,
+                              "name": "ONTAP",
+                              "credential_type": {
+                                   "name": "NetApp",
+                                   "kind": "cloud",
+                                   "type": "credential_type"
+                              },
+                              "type": "credential"
+                         }
+                    ],
+                    "schedules": [],
+                    "notification_templates_started": [],
+                    "notification_templates_success": [],
+                    "notification_templates_error": [],
+                    "survey_spec": {
+                         "name": "",
+                         "description": "",
+                         "spec": [
+                              {
+                                   "question_name": "Source ONTAP Cluster hostname",
+                                   "question_description": "The IP address or DNS reachable/FQDN of source ONTAP Cluster",
+                                   "required": true,
+                                   "type": "text",
+                                   "variable": "netapp_hostname",
+                                   "min": 0,
+                                   "max": 1024,
+                                   "default": "",
+                                   "choices": "",
+                                   "formattedChoices": [
+                                        {
+                                             "choice": "",
+                                             "isDefault": false,
+                                             "id": 0
+                                        }
+                                   ],
+                                   "new_question": false
+                              },
+                              {
+                                   "question_name": "Source SVM name",
+                                   "question_description": "The source ONTAP Cluster SVM name",
+                                   "required": true,
+                                   "type": "text",
+                                   "variable": "src_vserver",
+                                   "min": 0,
+                                   "max": 1024,
+                                   "default": "",
+                                   "choices": "",
+                                   "formattedChoices": [
+                                        {
+                                             "choice": "",
+                                             "isDefault": false,
+                                             "id": 0
+                                        }
+                                   ],
+                                   "new_question": false
+                              },
+                              {
+                                   "question_name": "Source Volume name",
+                                   "question_description": "Name of Volume to be protected via Snapmirror",
+                                   "required": true,
+                                   "type": "text",
+                                   "variable": "src_volume",
+                                   "min": 0,
+                                   "max": 1024,
+                                   "default": "",
+                                   "choices": "",
+                                   "formattedChoices": [
+                                        {
+                                             "choice": "",
+                                             "isDefault": false,
+                                             "id": 0
+                                        }
+                                   ],
+                                   "new_question": false
+                              },
+                              {
+                                   "question_name": "Destination ONTAP Cluster hostname",
+                                   "question_description": "IP address or DNS reachable/FQDN of destination ONTAP Cluster",
+                                   "required": true,
+                                   "type": "text",
+                                   "variable": "dest_netapp_hostname",
+                                   "min": 0,
+                                   "max": 1024,
+                                   "default": "",
+                                   "choices": "",
+                                   "formattedChoices": [
+                                        {
+                                             "choice": "",
+                                             "isDefault": false,
+                                             "id": 0
+                                        }
+                                   ],
+                                   "new_question": false
+                              },
+                              {
+                                   "question_name": "Destination SVM name",
+                                   "question_description": "The destination ONTAP Cluster Vserver name",
+                                   "required": true,
+                                   "type": "text",
+                                   "variable": "dest_vserver",
+                                   "min": 0,
+                                   "max": 1024,
+                                   "default": "",
+                                   "choices": "",
+                                   "formattedChoices": [
+                                        {
+                                             "choice": "",
+                                             "isDefault": false,
+                                             "id": 0
+                                        }
+                                   ],
+                                   "new_question": false
+                              }
+                         ]
+                    }
+               },
+               "natural_key": {
+                    "organization": {
+                         "name": "Default",
+                         "type": "organization"
+                    },
+                    "name": "Delete Volume Snapmirror",
                     "type": "job_template"
                }
           },
