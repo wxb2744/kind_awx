@@ -3,7 +3,7 @@ all: kind kubectl ingress awx
 kind:
 	kind create cluster --image kindest/node:v1.19.11 --config kind.yml
 	docker stop kind-control-plane
-	docker update --reboot always kind-control-plane
+	docker update --restart always kind-control-plane
 	docker start kind-control-plane
 
 kubectl: 
