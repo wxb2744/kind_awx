@@ -5,7 +5,8 @@ kind:
 	docker stop kind-control-plane
 	docker update --restart always kind-control-plane
 	docker start kind-control-plane
-	sleep 10
+        echo "Pausing for kind to restart"
+	sleep 15
 
 kubectl: 
 	$(eval MASTER_IP=$(shell docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' kind-control-plane))
