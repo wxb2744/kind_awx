@@ -5,7 +5,7 @@ kind:
 	docker stop kind-control-plane
 	docker update --restart always kind-control-plane
 	docker start kind-control-plane
-        echo "Pausing for kind to restart"
+	echo "Pausing for kind to restart"
 	sleep 15
 
 kubectl: 
