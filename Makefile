@@ -31,7 +31,7 @@ fix: kubectl
 	kubectl --insecure-skip-tls-verify replace -f /root/.kube/awx.yml
 	#@read -p "FQDN: " FQDN \
 	#&& sed -i "s/^  hostname:.*/  hostname: $$FQDN/" /root/kind_awx//awx.yml
-	kubectl --insecure-skip-tls-verify apply -f /root.kube/awx.yml
+	kubectl --insecure-skip-tls-verify apply -f /root/.kube/awx.yml
 
 import:
 	$(eval MASTER_IP=$(shell docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' kind-control-plane))
