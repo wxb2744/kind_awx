@@ -6,4 +6,4 @@ metadata:
 spec:
   postgres_storage_class: standard
   ingress_type: ingress
-#  hostname: awx.example.com
+  hostname: awx.example.com
