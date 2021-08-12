@@ -28,6 +28,8 @@ clean:
 fix: kubectl
 	kubectl --insecure-skip-tls-verify delete ingress awx-ingress
 	kubectl --insecure-skip-tls-verify replace -f awx.yml
+	@read -p "FQDN: " FQDN \
+	&& sed -i "s/^  hostname:.*/  hostname: $$FQDN/" /root/kind_awx//awx.yml
 	kubectl --insecure-skip-tls-verify apply -f awx.yml
 
 import:
