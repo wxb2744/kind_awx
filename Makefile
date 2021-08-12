@@ -20,17 +20,18 @@ awx:
 	kubectl apply -f https://raw.githubusercontent.com/ansible/awx-operator/0.12.0/deploy/awx-operator.yaml
 	@read -p "FQDN: " FQDN \
 	&& sed -i "s/^  hostname:.*/  hostname: $$FQDN/" /root/kind_awx//awx.yml
-	kubectl apply -f awx.yml
+	cp /root/kind_awx/awx.yml /root/.kube/
+	kubectl apply -f /root/.kube/awx.yml
 
 clean:
 	kind delete cluster
 
 fix: kubectl
 	kubectl --insecure-skip-tls-verify delete ingress awx-ingress
-	kubectl --insecure-skip-tls-verify replace -f awx.yml
-	@read -p "FQDN: " FQDN \
-	&& sed -i "s/^  hostname:.*/  hostname: $$FQDN/" /root/kind_awx//awx.yml
-	kubectl --insecure-skip-tls-verify apply -f awx.yml
+	kubectl --insecure-skip-tls-verify replace -f /root/.kube/awx.yml
+	#@read -p "FQDN: " FQDN \
+	#&& sed -i "s/^  hostname:.*/  hostname: $$FQDN/" /root/kind_awx//awx.yml
+	kubectl --insecure-skip-tls-verify apply -f /root.kube/awx.yml
 
 import:
 	$(eval MASTER_IP=$(shell docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' kind-control-plane))
