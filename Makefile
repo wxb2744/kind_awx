@@ -2,11 +2,11 @@ all: kind kubectl ingress awx
 
 kind:
 	kind create cluster --image kindest/node:v1.19.11 --config kind.yml
-	docker stop kind-control-plane
-	docker update --restart always kind-control-plane
-	docker start kind-control-plane
-	echo "Pausing for kind to restart"
-	sleep 15
+#	docker stop kind-control-plane
+#	docker update --restart always kind-control-plane
+#	docker start kind-control-plane
+#	echo "Pausing for kind to restart"
+#	sleep 15
 
 kubectl: 
 	$(eval MASTER_IP=$(shell docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' kind-control-plane))
