@@ -28,6 +28,8 @@ clean:
 
 fix: kubectl
 	docker start kind-control-plane
+	echo "Pausing for kind to restart"
+	sleep 15
 	kubectl --insecure-skip-tls-verify delete ingress awx-ingress
 	kubectl --insecure-skip-tls-verify replace -f /root/.kube/awx.yml
 	#@read -p "FQDN: " FQDN \
