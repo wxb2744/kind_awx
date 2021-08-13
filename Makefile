@@ -27,6 +27,7 @@ clean:
 	kind delete cluster
 
 fix: kubectl
+	docker start kind-control-plane
 	kubectl --insecure-skip-tls-verify delete ingress awx-ingress
 	kubectl --insecure-skip-tls-verify replace -f /root/.kube/awx.yml
 	#@read -p "FQDN: " FQDN \
