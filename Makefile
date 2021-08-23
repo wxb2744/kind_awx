@@ -13,7 +13,8 @@ kubectl:
 	sed -i "s/^    server:.*/    server: https:\/\/$(MASTER_IP):6443/" /root/.kube/config
 
 ingress:
-	kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
+	#kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
+	kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/499ed16cc87c32b4600301d20244bde369c372af/deploy/static/provider/kind/deploy.yaml
 
 awx:
 	kubectl apply -f password.yml
