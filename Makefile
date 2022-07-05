@@ -2,23 +2,17 @@ all: kind kubectl ingress awx
 
 kind:
 	kind create cluster --image kindest/node:v1.19.11 --config kind.yml
-#	docker stop kind-control-plane
-#	docker update --restart always kind-control-plane
-#	docker start kind-control-plane
-#	echo "Pausing for kind to restart"
-#	sleep 15
 
 kubectl: 
 	$(eval MASTER_IP=$(shell docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' kind-control-plane))
 	sed -i "s/^    server:.*/    server: https:\/\/$(MASTER_IP):6443/" /root/.kube/config
 
 ingress:
-	#kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
-	kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/499ed16cc87c32b4600301d20244bde369c372af/deploy/static/provider/kind/deploy.yaml
+	kubectl apply -f deploy.yaml
 
 awx:
 	kubectl apply -f password.yml
-	kubectl apply -f https://raw.githubusercontent.com/ansible/awx-operator/0.12.0/deploy/awx-operator.yaml
+	kubectl apply -f awx-operator.yaml
 	@read -p "FQDN: " FQDN \
 	&& sed -i "s/^  hostname:.*/  hostname: $$FQDN/" /root/kind_awx//awx.yml
 	cp /root/kind_awx/awx.yml /root/.kube/
@@ -33,8 +27,6 @@ fix: kubectl
 	sleep 15
 	kubectl --insecure-skip-tls-verify delete ingress awx-ingress
 	kubectl --insecure-skip-tls-verify replace -f /root/.kube/awx.yml
-	#@read -p "FQDN: " FQDN \
-	#&& sed -i "s/^  hostname:.*/  hostname: $$FQDN/" /root/kind_awx//awx.yml
 	kubectl --insecure-skip-tls-verify apply -f /root/.kube/awx.yml
 
 import:
